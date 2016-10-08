@@ -1,3 +1,4 @@
+
 /* Implement the function asyncMap:
  *
  * asyncMap has two parameters, an array of asynchronous functions (tasks) and a callback.
@@ -101,6 +102,47 @@ console.log('test stringCompression1: ', stringCompression('aabbbcddd')) // => '
 console.log('test stringCompression1: ', stringCompression('c')) // => 'c'
 
 
+
+//---------------------------------------------------------------
+
+
+/* "Given a string, find the longest substring without repeating characters.
+
+For example, for string “abccdefgh”, the longest substring is “cdefgh”. */
+
+function longestRun(string) {
+  var longestSubstring = '';
+  var tempSubstring = '';
+
+  var compareTempToLong = function () {
+    if (tempSubstring.length > longestSubstring.length) {
+    longestSubstring = tempSubstring;
+    }
+  };
+
+  // loop through string
+  for (var i = 0; i < string.length; i++) {
+    // check if i+1 is NOT the same as i
+    if (string[i] !== string[i+1]) {
+      // concat i to tempSubstring
+      tempSubstring += string[i];
+    }
+    //else
+    else {
+      // see if tempSubstring > longestSubstring
+      compareTempToLong();
+      // reset tempSubstring
+      tempSubstring = '';
+    }
+  }
+  // run comare to check the last run of the string
+  compareTempToLong();
+
+  return longestSubstring;
+};
+
+
+// console.log('longestRun: ', longestRun('abccdefgh'));
 
 
 //---------------------------------------------------------------

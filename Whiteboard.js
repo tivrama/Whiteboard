@@ -75,7 +75,11 @@ function asyncMap(array, cb) {
 function stringCompression(string) {
   var compressedString = [];
   var count = 1;
-  // var countAsString;
+  var tempIndex = null;
+  
+  if (string.length === 1) {
+    return string;
+  }
 
   // Loop through string
   for (var i = 0; i < string.length; i++) {
@@ -85,21 +89,30 @@ function stringCompression(string) {
     if (string[i] === string[i+1]) {
       // increment count
       count++;
+      // them if temp index is counting
+      if (tempIndex === null) {
+        tempIndex = compressedString.length;
+      }
     }
     // else if count is > 1
     else if (count > 1) {
       // replace repeated chars with number based on count
-      compressedString.splice(i - count, count, count-1);
+      compressedString.splice(tempIndex, compressedString.length, count);
       // reset count to one
       count = 1;
+      tempIndex = null;
+    }
+    else {
+      // replace repeated chars with number based on count
+      compressedString.push(1);
     }
   }
 
   return compressedString.join('');
 };
 
-console.log('test stringCompression1: ', stringCompression('aabbbcddd')) // => 'a2b3c1d3'
-console.log('test stringCompression1: ', stringCompression('c')) // => 'c'
+// console.log('test stringCompression1: ', stringCompression('aabbbcddd')) // => 'a2b3c1d3'
+// console.log('test stringCompression1: ', stringCompression('c')) // => 'c'
 
 
 
@@ -142,7 +155,7 @@ function longestRun(string) {
 };
 
 
-// console.log('longestRun: ', longestRun('abccdefgh'));
+console.log('longestRun: ', longestRun('abccdefgh'));
 
 
 //---------------------------------------------------------------

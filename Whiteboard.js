@@ -1,4 +1,54 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------
+
 /* Implement the function asyncMap:
  *
  * asyncMap has two parameters, an array of asynchronous functions (tasks) and a callback.
@@ -53,13 +103,160 @@ function asyncMap(array, cb) {
 
 };
 
+//---------------------------------------------------------------
 
+/*
+Comparators are used to compare two objects. In this challenge, you'll create a comparator and use it to sort an array. The Player class is provided in the editor below; it has two fields:
+A string, .
+An integer, .
+Given an array of  Player objects, write a comparator that sorts them in order of decreasing score; if 2 or more players have the same score, sort those players alphabetically by name. To do this, you must create a Checker class that implements the Comparator interface, then write an int compare(Player a, Player b) method implementing the Comparator.compare(T o1, T o2) method.
+Input Format
+Locked stub code in the Solution class handles the following input from stdin: 
+The first line contains an integer, , denoting the number of players. 
+Each of the  subsequent lines contains a player's respective  and .
+Constraints
+Two or more players can have the same name.
+Player names consist of lowercase English alphabetic letters.
+Sample Input
+5
+amy 100
+david 100
+heraldo 50
+aakansha 75
+aleksa 150
+Sample Output
+aleksa 150
+amy 100
+david 100
+aakansha 75
+heraldo 50
+Explanation
+As you can see, the players are first sorted by decreasing score and then sorted alphabetically by name.
+*/
+
+// player = {name: '', score: n}
+// input [ {name: '', score: n}, {name: '', score: n}, {name: '', score: n}, {name: '', score: n} ];
+
+// bubble sort checks score and name with series of ifs
+// Feel free to add helper functions if needed.
+
+var sortPalyers = function(arrayOfPlayers) {
+  var i;
+  var temp;
+
+  // Returns true if player1 should sort before player2
+  var compare2Players = function (player1, player2) {
+    // first compare 
+
+
+    return 
+  };
+
+  var bubbleSort = function(array) {
+    //make a loop that goes through the array.
+    for (i = 0; i < array.length; i++) {
+      //compare i to i+
+      //if i is bigger, save it to a temp position
+      if (compare2Players(array[i], array[i+1])) {
+      //then copy i+1 over i.
+        temp = array[i];
+      //now save i to i+1
+        array[i] = array[i+1]
+        array[i+1] = temp;
+      }
+    }
+    return array;
+  };
+};
+
+
+
+//---------------------------------------------------------------
+
+/*
+* A permutation is an arrangement of members of a set.
+* https://en.wikipedia.org/wiki/Permutation
+* 
+* Implement stringPermutation so that it takes two string inputs, and outputs
+* a boolean indicating if on is a permutation of the other. All letters must be included.
+*
+* For instance:
+* stringPermutation('babel', 'lebab') // => true
+* stringPermutation('what', 'wat') // false
+*/
+var stringPermutation = function(string1, string2) {
+  return string1.split('').sort().join('') === string2.split('').sort().join('');
+}
+
+// console.log('stringPermutation: ', stringPermutation('babel', 'lebab'));
 
 
 
 
 
 //---------------------------------------------------------------
+
+
+/*
+You are given the dimensions and location on the x-y coordinate of two rectangles. You need to return: out of the total area of both rectangles, what percentage do the rectangles overlap.
+Ex:
+The first rectangle starts (bottom left corner) at [1,2] on the x-y coordinate. It has width 3 and height 2.
+The second rectangle starts (bottom left corner) at [3,3], has width 2 and height 4.
+The overall area of both rectangles is 14 (2*3 + 2*4). They overlap just for 1 square, so the percentage overlap is 7.1% (1/14), which is the number you would return.
+*/
+
+function totalAreaOfRectangles(rectangle1, rectangle2) {
+  var rec1Area = rectangle1[1] * rectangle1[2];
+  var rec2Area = rectangle2[1] * rectangle2[2];
+  var totalArea = rec1Area + rec2Area;
+  var rec1coordinates;
+  var rec2coordinates;
+  var overlapCount = 0;
+
+  // subroutine that makes an array of coordinates based on inputs
+  function makeRectangleCoodinates(arrStart) {
+    coordinates = [];
+    //loop with length set to x & y
+    for (var i = arrStart[0][0] - (arrStart[2] - 1); i <= arrStart[0][0]; i++) {
+      //push tuples into coordinates
+      for (var j = arrStart[0][1]; j <= arrStart[0][1] + (arrStart[1] - 1); j++) {
+        coordinates.push(i.toString() + j);
+      }
+    }
+    return coordinates;
+  }
+
+  rec1coordinates = makeRectangleCoodinates(rectangle1);
+  rec2coordinates = makeRectangleCoodinates(rectangle2);
+
+  //loop over smallest rectangle
+  if (rec1coordinates.length <= rec2coordinates.length) {
+    // Loop over  coordinares
+    for (var i = 0; i < rec1coordinates.length; i++) {
+      //increment count at each matching coordinate
+      if (rec2coordinates.indexOf(rec1coordinates[i]) !== -1) {
+        overlapCount++;
+      }
+    }
+  } else {
+    for (var i = 0; i < rec2coordinates.length; i++) {
+      //increment count at each matching coordinate
+      if (rec1coordinates.indexOf(rec2coordinates[i]) !== -1) {
+        overlapCount++;
+      }
+    }
+  }
+
+  return overlapCount / totalArea;
+}
+
+var rectangle1 = [[1, 2], 3, 2];
+var rectangle2 = [[3, 3], 2, 4];
+// console.log('overlap rectangles: ', totalAreaOfRectangles(rectangle1, rectangle2));
+
+
+//---------------------------------------------------------------
+
 
 /**
   * Implement a method to perform basic string compression using the counts of repeated characters.
@@ -154,8 +351,8 @@ function longestRun(string) {
   return longestSubstring;
 };
 
+// console.log('longestRun: ', longestRun('abccdefgh'));
 
-console.log('longestRun: ', longestRun('abccdefgh'));
 
 
 //---------------------------------------------------------------

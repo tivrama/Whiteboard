@@ -1,23 +1,89 @@
 
 
 
+// stacking coins.  Each element is a total count of coins.  They stack like so:
+/*
+2:
+#
+#
+
+5:
+#
+##
+##
+
+8:
+#
+##
+##
+###
+
+3:
+#
+##
+
+*/
+// in [2, 5, 8, 3]
+// out 1, 2, 3, 2
+
+function arrangeCoins(coins) {
+    var currentStackSize = 0;  // number to be returned
+    var stackRowSize = 0;  // number of slots in current stack
+    var currentCoin = 1;  // current coin
+    // subroutine that prints number from current element
+    function sub(n) {
+        if (n === 0) {
+            return 0;
+        }
+        for (var i = 1; i <= n; i++) {
+            if (currentCoin >= stackRowSize + 1) {
+                currentCoin = 1; // reset currentCoin
+                currentStackSize += 1;
+                stackRowSize += 1;
+            } else {
+                currentCoin += 1;
+            }
+        }
+        stackRowSize = 0;
+        currentCoin = 1;
+        return currentStackSize;
+    }
+    
+    // loop through coin array and call sub on each element
+    for (var i = 0; i < coins.length; i++) {
+        console.log(sub(coins[i]));
+        currentStackSize = 0;
+    }
+}
 
 
 
 
 
+//------------------
 
+//Input:  abc
 
+//Output: a, ab, abc, ac, b, bc, c
 
-
-
-
-
-
-
-
-
-
+/*
+ * Complete the function below.
+ */
+function buildSubsequences(s) {
+    var resultsArray = [];
+    var currentPerm = '';
+    s = s.split('').sort();
+   
+    function sub(array) {
+        //base case
+        if (array.length === 0) {
+            return;
+        }
+        resultsArray.push(array.join(''));
+        
+        sub()
+    }
+}
 
 
 
